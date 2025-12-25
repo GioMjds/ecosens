@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  Resident
+  Staff
+  Admin
+}
+
+enum ReportStatus {
+  Submitted
+  UnderReview
+  Verified
+  Resolved
+  Closed
+}
+
+model UserRole {
+  id     String @id
+  userId String
+  role   Role
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, role])
+}
+
+model User {
+  id        String   @id
+  email     String?  @unique
+  password  String?
+  fullname  String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  role          UserRole[]
+  reports       Report[]
+  notifications Notification[]
+}
+
+model Report {
+  id          String       @id @default(uuid())
+  title       String
+  description String
+  status      ReportStatus @default(Submitted)
+  isAnonymous Boolean      @default(false)
+
+  reporterId String?
+  reporter   User?   @relation(fields: [reporterId], references: [id])
+
+  files ReportFile[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
+
+model ReportFile {
+  id       String @id @default(uuid())
+  reportId String
+  fileUrl  String
+  fileType String
+  mimeType String
+  filePath String
+
+  report Report @relation(fields: [reportId], references: [id])
+
+  createdAt DateTime @default(now())
+}
+
+model Notification {
+  id      String  @id @default(uuid())
+  userId  String
+  message String
+  isRead  Boolean @default(false)
+
+  user User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+}
