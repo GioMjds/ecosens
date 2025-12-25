@@ -14,7 +14,9 @@ export class CloudinaryService {
 	async uploadImage(file: Express.Multer.File): Promise<any> {
 		return new Promise((resolve, reject) => {
 			cloudinary.uploader
-				.upload_stream((error, result) => {
+				.upload_stream(
+					{ resource_type: 'image' },
+					(error, result) => {
 					if (error) return reject(error);
 					resolve(result);
 				})
@@ -22,8 +24,30 @@ export class CloudinaryService {
 		});
 	}
 
+	async uploadVideo(file: Express.Multer.File): Promise<any> {
+		return new Promise((resolve, reject) => {
+			cloudinary.uploader
+				.upload_stream(
+					{ resource_type: 'video' },
+					(error, result) => {
+						if (error) return reject(error);
+						resolve(result);
+					}
+				)
+				.end(file.buffer);
+		});
+	}
+
 	async deleteImage(publicId: string): Promise<any> {
-		return cloudinary.uploader.destroy(publicId);
+		return cloudinary.uploader.destroy(publicId, { 
+			resource_type: 'image' 
+		});
+	}
+
+	async deleteVideo(publicId: string): Promise<any> {
+		return cloudinary.uploader.destroy(publicId, {
+			resource_type: 'video',
+		});
 	}
 
 	getCloudinary() {
