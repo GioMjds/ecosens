@@ -20,12 +20,14 @@ import {
     UpdateReportDto,
 } from '../../../shared/dto/reports.dto';
 import type { Request } from 'express';
+import { Public } from '../../../shared/guards/permissions.guard';
 
 @Controller('report')
 export class ReportController {
     constructor(private readonly reportService: ReportsService) {}
 
     // Allow residents to submit up to 5 reports per minute
+    @Public()
     @Throttle({ default: { limit: 5, ttl: 60 } })
     @Post('submit')
     @HttpCode(HttpStatus.CREATED)
@@ -46,6 +48,7 @@ export class ReportController {
     // List reports for the authenticated resident (their own reports)
     @Throttle({ default: { limit: 20, ttl: 60 } })
     @Get()
+    @HttpCode(HttpStatus.OK)
     async getMyReports(
         @Req() req: Request
     ) {

@@ -3,7 +3,6 @@ import { AuthLogin } from "@/types/auth/Auth.types";
 
 const admins = httpClient.endpoint('admin');
 const staffs = httpClient.endpoint('staff');
-const residents = httpClient.endpoint('resident');
 
 export const admin = {
     async login({ email, password }: AuthLogin) {
@@ -33,17 +32,17 @@ export const staff = {
 
 export const resident = {
     async login({ email, password }: AuthLogin) {
-        return residents.post('/login', {
+        return httpClient.post('/login', {
             email: email,
             password: password
         });
     },
 
     async register() {
-        return residents.post('/register');
+        return httpClient.post('/register');
     },
 
     async logout() {
-        return residents.post('/logout');
+        return httpClient.post('/logout');
     }
 }

@@ -9,13 +9,13 @@ import {
     Put,
     UseGuards,
 } from '@nestjs/common';
-import { PermissionGuard } from '../../../shared/guards/permissions.guard';
-import { Roles } from '../../../shared/decorators/roles.decorator';
-import { ReportsService } from '../../../shared/services/reports.service';
-import { ChangeReportStatusDto } from '../../../shared/dto/reports.dto';
+import { PermissionGuard } from '../guards/permissions.guard';
+import { Roles } from '../decorators/roles.decorator';
+import { ReportsService } from '../services/reports.service';
+import { ChangeReportStatusDto } from '../dto/reports.dto';
 
 @UseGuards(PermissionGuard)
-@Roles('Admin')
+@Roles('Admin', 'Staff')
 @Controller('reports')
 export class ReportsController {
     constructor(private readonly reportsService: ReportsService) {}

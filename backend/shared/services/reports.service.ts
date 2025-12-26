@@ -123,7 +123,7 @@ export class ReportsService {
     }
 
     /**
-     * Update report
+     * Update report status (Resident-side only)
      * @param reportId Report ID
      * @param dto Update data
      */
@@ -355,12 +355,16 @@ export class ReportsService {
         try {
             const reports = await this.prisma.report.findMany({
                 where: { 
-                    reporterId, 
+                    reporterId: reporterId, 
                     deletedAt: null 
                 },
                 include: { files: true },
                 orderBy: { createdAt: 'desc' },
             });
+
+            if (!reports || reports.length === 0) {
+                throw new NotFoundException('No reports found for this reporter');
+            }
 
             this.log.log(`Fetched ${reports.length} reports for reporter ${reporterId}`);
             return reports;

@@ -2,11 +2,13 @@ import { Body, Controller, HttpCode, HttpStatus, Post, Res } from '@nestjs/commo
 import { AuthService } from '../../shared/services/auth.service';
 import type { Response } from 'express';
 import { AuthLoginDto } from '../../shared/dto/auth.dto';
+import { Public } from '../../shared/guards/permissions.guard';
 
-@Controller('resident')
+@Controller()
 export class ResidentController {
     constructor(private readonly authService: AuthService) {}
 
+    @Public()
     @Post('login')
     @HttpCode(HttpStatus.OK)
     async login(

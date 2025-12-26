@@ -9,11 +9,13 @@ import {
 import type { Response } from 'express';
 import { AuthService } from '../../shared/services/auth.service';
 import { AuthLoginDto } from '../../shared/dto/auth.dto';
+import { Public } from '../../shared/guards/permissions.guard';
 
-@Controller('staff')
+@Controller()
 export class StaffController {
 	constructor(private readonly authService: AuthService) {}
 
+	@Public()
 	@Post('login')
 	@HttpCode(HttpStatus.OK)
 	async login(

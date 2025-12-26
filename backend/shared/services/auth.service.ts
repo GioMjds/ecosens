@@ -115,7 +115,7 @@ export class AuthService {
             });
 
             if (!resident) {
-                throw new NotFoundException('Resident does not exist or is not authorized');
+                throw new NotFoundException('Resident does not exist');
             }
 
             if (!resident.password) {
