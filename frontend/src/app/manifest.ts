@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
 	return {
-        name: "Your app name here",
+        name: "EcoSens",
         description: "Your app description here.",
         start_url: "/",
         display: "standalone",

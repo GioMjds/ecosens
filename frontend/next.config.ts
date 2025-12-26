@@ -5,7 +5,6 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   experimental: {
     globalNotFound: true,
-    turbopackFileSystemCacheForDev: true
   }
 };
 

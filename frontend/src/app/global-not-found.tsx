@@ -1,10 +1,10 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Kumbh_Sans } from 'next/font/google';
+import { Source_Sans_3 } from 'next/font/google';
 
-const kumbhSans = Kumbh_Sans({
-	variable: '--font-kumbh-sans',
-	subsets: ['latin'],
+const sourceSans3 = Source_Sans_3({
+    variable: '--font-source-sans-3',
+    subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
@@ -14,9 +14,8 @@ export const metadata: Metadata = {
 
 export default function GlobalNotFound() {
     return (
-        // This is the global not found page
         <html lang='en'>
-            <body className={`${kumbhSans.variable} ${kumbhSans.style} antialiased`}>
+            <body className={`${sourceSans3.variable} ${sourceSans3.style} antialiased`}>
                 <h1>Page Not Found</h1>
             </body>
         </html>

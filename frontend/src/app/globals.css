@@ -1,3 +1,313 @@
-@import "tailwindcss";
+/* Theme: Forest Canopy */
 
-/* Custom styles here */
+@import 'tailwindcss';
+
+@theme {
+	/* Nature Color Palette - Forest Canopy */
+	--color-forest-deep: #2f5249; /* Deep forest green */
+	--color-forest-mid: #437057; /* Medium forest green */
+	--color-forest-light: #97b067; /* Moss/olive green */
+	--color-sunlight: #e3de61; /* Warm sunlight yellow */
+
+	/* Semantic color mapping based on usage */
+	--color-background-primary: #ffffff;
+	--color-background-secondary: #f9faf7;
+	--color-background-tertiary: #f2f4ef;
+	--color-background-alt: #e8ede4;
+
+	--color-surface-primary: #ffffff;
+	--color-surface-secondary: #f9faf7;
+	--color-surface-elevated: #ffffff;
+
+	--color-text-primary: #1a2c26;
+	--color-text-secondary: #3c4d47;
+	--color-text-tertiary: #5c6e67;
+	--color-text-inverse: #ffffff;
+
+	--color-border-light: #e8ede4;
+	--color-border-medium: #d3dcd0;
+	--color-border-heavy: #97b067;
+
+	--color-accent-primary: #437057; /* Primary action color */
+	--color-accent-secondary: #2f5249; /* Secondary action color */
+	--color-accent-tertiary: #97b067; /* Tertiary/alternative actions */
+	--color-accent-highlight: #e3de61; /* Highlights, alerts, warnings */
+
+	--color-state-success: #437057;
+	--color-state-warning: #e3de61;
+	--color-state-error: #d94c4c;
+	--color-state-info: #4a7b9d;
+
+	--color-icon-primary: #3c4d47;
+	--color-icon-secondary: #5c6e67;
+	--color-icon-accent: #437057;
+	--color-icon-highlight: #e3de61;
+
+	--color-button-primary: #437057;
+	--color-button-primary-hover: #2f5249;
+	--color-button-primary-text: #ffffff;
+
+	--color-button-secondary: #97b067;
+	--color-button-secondary-hover: #7d9855;
+	--color-button-secondary-text: #1a2c26;
+
+	--color-button-tertiary: #e8ede4;
+	--color-button-tertiary-hover: #d3dcd0;
+	--color-button-tertiary-text: #3c4d47;
+
+	--color-link: #437057;
+	--color-link-hover: #2f5249;
+	--color-link-visited: #5c6e67;
+
+	--shadow-card: 0 2px 8px rgba(47, 82, 73, 0.08);
+	--shadow-elevated: 0 4px 16px rgba(47, 82, 73, 0.12);
+	--shadow-button: 0 2px 4px rgba(47, 82, 73, 0.15);
+
+	--radius-sm: 0.375rem;
+	--radius-md: 0.5rem;
+	--radius-lg: 0.75rem;
+	--radius-xl: 1rem;
+}
+
+/* Base styles using the theme */
+@layer base {
+	:root {
+		color-scheme: light;
+	}
+
+	body {
+		@apply bg-background-primary text-text-primary font-sans antialiased;
+		background-color: var(--color-background-primary);
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply text-text-primary font-semibold tracking-tight;
+	}
+
+	h1 {
+		@apply text-3xl md:text-4xl;
+	}
+
+	h2 {
+		@apply text-2xl md:text-3xl;
+	}
+
+	h3 {
+		@apply text-xl md:text-2xl;
+	}
+
+	a {
+		@apply text-link transition-colors duration-200;
+	}
+
+	a:hover {
+		@apply text-link-hover;
+	}
+
+	/* Selection color */
+	::selection {
+		@apply bg-forest-light/30 text-text-primary;
+	}
+}
+
+/* Component styles */
+@layer components {
+	/* Button Styles */
+	.btn-primary {
+		@apply bg-button-primary text-button-primary-text px-6 py-3 rounded-lg font-medium 
+           transition-all duration-200 hover:bg-button-primary-hover 
+           focus:outline-none focus:ring-2 focus:ring-forest-mid/50 
+           focus:ring-offset-2 active:scale-[0.98] shadow-button;
+	}
+
+	.btn-secondary {
+		@apply bg-button-secondary text-button-secondary-text px-6 py-3 rounded-lg font-medium 
+           transition-all duration-200 hover:bg-button-secondary-hover 
+           focus:outline-none focus:ring-2 focus:ring-forest-light/50 
+           focus:ring-offset-2 active:scale-[0.98];
+	}
+
+	.btn-tertiary {
+		@apply bg-button-tertiary text-button-tertiary-text px-6 py-3 rounded-lg font-medium 
+           transition-all duration-200 hover:bg-button-tertiary-hover 
+           focus:outline-none focus:ring-2 focus:ring-forest-light/30 
+           focus:ring-offset-2 active:scale-[0.98];
+	}
+
+	/* Card Styles */
+	.card {
+		@apply bg-surface-primary rounded-xl p-6 shadow-card border border-border-light;
+	}
+
+	.card-elevated {
+		@apply bg-surface-primary rounded-xl p-6 shadow-elevated border border-border-light;
+	}
+
+	/* Form Styles */
+	.input-field {
+		@apply w-full px-4 py-3 rounded-lg border border-border-medium 
+           focus:outline-none focus:ring-2 focus:ring-accent-primary/30 
+           focus:border-accent-primary transition-all duration-200 
+           bg-background-primary text-text-primary;
+	}
+
+	.input-field:disabled {
+		@apply opacity-50 cursor-not-allowed bg-background-tertiary;
+	}
+
+	/* Badge Styles */
+	.badge {
+		@apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+	}
+
+	.badge-primary {
+		@apply bg-accent-primary/10 text-accent-primary;
+	}
+
+	.badge-secondary {
+		@apply bg-accent-secondary/10 text-accent-secondary;
+	}
+
+	.badge-highlight {
+		@apply bg-accent-highlight/20 text-text-primary;
+	}
+
+	/* Alert Styles */
+	.alert {
+		@apply rounded-lg p-4 border;
+	}
+
+	.alert-success {
+		@apply bg-state-success/10 border-state-success/20 text-state-success;
+	}
+
+	.alert-warning {
+		@apply bg-state-warning/20 border-state-warning/30 text-text-primary;
+	}
+
+	.alert-error {
+		@apply bg-state-error/10 border-state-error/20 text-state-error;
+	}
+
+	.alert-info {
+		@apply bg-state-info/10 border-state-info/20 text-state-info;
+	}
+
+	/* Navigation Styles */
+	.nav-link {
+		@apply text-text-secondary hover:text-accent-primary transition-colors duration-200 
+           px-3 py-2 rounded-md hover:bg-background-alt;
+	}
+
+	.nav-link.active {
+		@apply text-accent-primary bg-background-alt;
+	}
+
+	/* Icon Styling */
+	.icon-primary {
+		@apply text-icon-primary;
+	}
+
+	.icon-secondary {
+		@apply text-icon-secondary;
+	}
+
+	.icon-accent {
+		@apply text-icon-accent;
+	}
+
+	.icon-highlight {
+		@apply text-icon-highlight;
+	}
+}
+
+/* Utility classes for direct color application */
+@layer utilities {
+	/* Background colors */
+	.bg-nature-deep {
+		background-color: var(--color-forest-deep);
+	}
+	.bg-nature-mid {
+		background-color: var(--color-forest-mid);
+	}
+	.bg-nature-light {
+		background-color: var(--color-forest-light);
+	}
+	.bg-nature-sunlight {
+		background-color: var(--color-sunlight);
+	}
+
+	/* Text colors */
+	.text-nature-deep {
+		color: var(--color-forest-deep);
+	}
+	.text-nature-mid {
+		color: var(--color-forest-mid);
+	}
+	.text-nature-light {
+		color: var(--color-forest-light);
+	}
+	.text-nature-sunlight {
+		color: var(--color-sunlight);
+	}
+
+	/* Border colors */
+	.border-nature-deep {
+		border-color: var(--color-forest-deep);
+	}
+	.border-nature-mid {
+		border-color: var(--color-forest-mid);
+	}
+	.border-nature-light {
+		border-color: var(--color-forest-light);
+	}
+	.border-nature-sunlight {
+		border-color: var(--color-sunlight);
+	}
+
+	/* Fill colors for SVGs */
+	.fill-nature-deep {
+		fill: var(--color-forest-deep);
+	}
+	.fill-nature-mid {
+		fill: var(--color-forest-mid);
+	}
+	.fill-nature-light {
+		fill: var(--color-forest-light);
+	}
+	.fill-nature-sunlight {
+		fill: var(--color-sunlight);
+	}
+
+	/* Gradients */
+	.bg-gradient-nature {
+		background: linear-gradient(
+			135deg,
+			var(--color-forest-deep) 0%,
+			var(--color-forest-mid) 50%,
+			var(--color-forest-light) 100%
+		);
+	}
+
+	.bg-gradient-subtle {
+		background: linear-gradient(
+			135deg,
+			var(--color-background-secondary) 0%,
+			var(--color-background-tertiary) 100%
+		);
+	}
+
+	/* Glass morphism effect */
+	.glass {
+		@apply backdrop-blur-md bg-white/70 border border-white/20;
+	}
+
+	.glass-dark {
+		@apply backdrop-blur-md bg-forest-deep/80 border border-forest-deep/30;
+	}
+}

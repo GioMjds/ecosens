@@ -1,15 +1,10 @@
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import type { Metadata } from 'next';
+import { Source_Sans_3 } from 'next/font/google';
 import Providers from '@/lib/tanstack-query';
 
-const geistSans = Geist({
-	variable: '--font-geist-sans',
-	subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-	variable: '--font-geist-mono',
+const sourceSans3 = Source_Sans_3({
+	variable: '--font-source-sans-3',
 	subsets: ['latin'],
 });
 
@@ -26,7 +21,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`${sourceSans3.variable} ${sourceSans3.style} antialiased`}
 			>
 				<Providers>{children}</Providers>
 			</body>
