@@ -20,6 +20,34 @@ export default function proxy(req: NextRequest) {
         return NextResponse.redirect(url);
     }
 
+    // Protect page routes under (private): require matching role cookie
+    if (pathname === '/admin' || pathname.startsWith('/admin/')) {
+        const adminCookie = req.cookies.get('admin_access')?.value;
+        if (!adminCookie) {
+            const url = req.nextUrl.clone();
+            url.pathname = '/login';
+            return NextResponse.redirect(url);
+        }
+    }
+
+    if (pathname === '/staff' || pathname.startsWith('/staff/')) {
+        const staffCookie = req.cookies.get('staff_access')?.value;
+        if (!staffCookie) {
+            const url = req.nextUrl.clone();
+            url.pathname = '/login';
+            return NextResponse.redirect(url);
+        }
+    }
+
+    if (pathname === '/resident' || pathname.startsWith('/resident/')) {
+        const residentCookie = req.cookies.get('access_token')?.value;
+        if (!residentCookie) {
+            const url = req.nextUrl.clone();
+            url.pathname = '/login';
+            return NextResponse.redirect(url);
+        }
+    }
+
     // Protect API routes by cookie values (backend sets these cookies on login):
     // - admin endpoints expect `admin_access`
     // - staff endpoints expect `staff_access`
@@ -60,5 +88,15 @@ export default function proxy(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/api/:path*', '/login', '/register', '/forgot', '/otp', '/reset'],
+    matcher: [
+        '/api/:path*',
+        '/login',
+        '/register',
+        '/forgot',
+        '/otp',
+        '/reset',
+        '/admin/:path*',
+        '/staff/:path*',
+        '/resident/:path*',
+    ],
 };

@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   experimental: {
     globalNotFound: true,
   },
+  allowedDevOrigins: ['*']
 };
 
 export default nextConfig;
