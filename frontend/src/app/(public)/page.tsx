@@ -1,4 +1,10 @@
+import Homepage from "./homepage";
+
+export const metadata = {
+    title: 'Welcome to EcoSens!',
+    description: 'EcoSens Public Homepage',
+}
 
 export default function Page() {
-    return <h1 className="text-nature-mid">Welcome to the Public Page</h1>
+    return <Homepage />;
 }

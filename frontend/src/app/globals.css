@@ -122,21 +122,21 @@
 		@apply bg-button-primary text-button-primary-text px-6 py-3 rounded-lg font-medium 
            transition-all duration-200 hover:bg-button-primary-hover 
            focus:outline-none focus:ring-2 focus:ring-forest-mid/50 
-           focus:ring-offset-2 active:scale-[0.98] shadow-button;
+           focus:ring-offset-2 shadow-button cursor-pointer;
 	}
 
 	.btn-secondary {
 		@apply bg-button-secondary text-button-secondary-text px-6 py-3 rounded-lg font-medium 
            transition-all duration-200 hover:bg-button-secondary-hover 
            focus:outline-none focus:ring-2 focus:ring-forest-light/50 
-           focus:ring-offset-2 active:scale-[0.98];
+           focus:ring-offset-2 active:scale-[0.98] cursor-pointer;
 	}
 
 	.btn-tertiary {
 		@apply bg-button-tertiary text-button-tertiary-text px-6 py-3 rounded-lg font-medium 
            transition-all duration-200 hover:bg-button-tertiary-hover 
            focus:outline-none focus:ring-2 focus:ring-forest-light/30 
-           focus:ring-offset-2 active:scale-[0.98];
+           focus:ring-offset-2 active:scale-[0.98] cursor-pointer;
 	}
 
 	/* Card Styles */
